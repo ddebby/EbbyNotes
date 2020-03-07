@@ -1,12 +1,167 @@
-<p><img src="images/fastai_logo.png" alt="Pathlib使用手册" /></p>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Pathlib Python的路径管理库 | EbbyNotes</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Pathlib Python的路径管理库" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Testing the first file." />
+<meta property="og:description" content="Testing the first file." />
+<link rel="canonical" href="https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html" />
+<meta property="og:url" content="https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html" />
+<meta property="og:site_name" content="EbbyNotes" />
+<meta property="og:image" content="https://ddebby.github.io/EbbyNotes/images/fastai_logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-07T00:00:00-05:00" />
+<script type="application/ld+json">
+{"dateModified":"2019-05-07T00:00:00-05:00","image":"https://ddebby.github.io/EbbyNotes/images/fastai_logo.png","description":"Testing the first file.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html"},"url":"https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html","headline":"Pathlib Python的路径管理库","datePublished":"2019-05-07T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/EbbyNotes/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ddebby.github.io/EbbyNotes/feed.xml" title="EbbyNotes" /><link rel="shortcut icon" type="image/x-icon" href="/EbbyNotes/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Pathlib Python的路径管理库 | EbbyNotes</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Pathlib Python的路径管理库" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Testing the first file." />
+<meta property="og:description" content="Testing the first file." />
+<link rel="canonical" href="https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html" />
+<meta property="og:url" content="https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html" />
+<meta property="og:site_name" content="EbbyNotes" />
+<meta property="og:image" content="https://ddebby.github.io/EbbyNotes/images/fastai_logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-07T00:00:00-05:00" />
+<script type="application/ld+json">
+{"dateModified":"2019-05-07T00:00:00-05:00","image":"https://ddebby.github.io/EbbyNotes/images/fastai_logo.png","description":"Testing the first file.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html"},"url":"https://ddebby.github.io/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html","headline":"Pathlib Python的路径管理库","datePublished":"2019-05-07T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://ddebby.github.io/EbbyNotes/feed.xml" title="EbbyNotes" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    // remove paragraph tags in rendered toc (happens from notebooks)
+    var toctags = document.querySelectorAll(".toc-entry")
+    toctags.forEach(e => (e.firstElementChild.innerText = e.firstElementChild.innerText.replace('¶', '')))
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/EbbyNotes/">EbbyNotes</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/EbbyNotes/about/">About Me</a><a class="page-link" href="/EbbyNotes/search/">Search</a><a class="page-link" href="/EbbyNotes/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Pathlib Python的路径管理库</h1><p class="page-description">Testing the first file.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2019-05-07T00:00:00-05:00" itemprop="datePublished">
+        May 7, 2019
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/EbbyNotes/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#pathlib使用方法归纳">Pathlib使用方法归纳</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#常用操作">常用操作</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#路径">路径</a></li>
+<li class="toc-entry toc-h4"><a href="#获取文件名文件后缀文件目录">获取文件名，文件后缀，文件目录</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#拼接检查与分解">拼接、检查与分解</a></li>
+<li class="toc-entry toc-h3"><a href="#遍历文件夹">遍历文件夹</a></li>
+<li class="toc-entry toc-h3"><a href="#创建文件夹">创建文件夹</a></li>
+<li class="toc-entry toc-h3"><a href="#查看文件信息">查看文件信息</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#获取详细信息">获取详细信息</a></li>
+<li class="toc-entry toc-h4"><a href="#文件大小">文件大小</a></li>
+<li class="toc-entry toc-h4"><a href="#创建时间">创建时间</a></li>
+<li class="toc-entry toc-h4"><a href="#修改时间">修改时间</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#参考">参考</a></li>
+</ul><p><img src="images/fastai_logo.png" alt="Pathlib使用手册"></p>
 
 <p><strong>摘要：</strong> 整理了Pathlib的使用方法，便于速查。</p>
 
 <!-- more-->
 
-<h2 id="pathlib使用方法归纳">Pathlib使用方法归纳</h2>
+<h2 id="pathlib使用方法归纳">
+<a class="anchor" href="#pathlib%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%BD%92%E7%BA%B3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pathlib使用方法归纳</h2>
 
-<h3 id="常用操作">常用操作</h3>
+<h3 id="常用操作">
+<a class="anchor" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>常用操作</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 </code></pre></div></div>
@@ -18,7 +173,8 @@
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 </code></pre></div></div>
 
-<h4 id="路径">路径</h4>
+<h4 id="路径">
+<a class="anchor" href="#%E8%B7%AF%E5%BE%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>路径</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p1</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 </code></pre></div></div>
@@ -40,7 +196,8 @@
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/1.fast.ai/nbs/dl1')
 </code></pre></div></div>
 
-<h4 id="获取文件名文件后缀文件目录">获取文件名，文件后缀，文件目录</h4>
+<h4 id="获取文件名文件后缀文件目录">
+<a class="anchor" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取文件名，文件后缀，文件目录</h4>
 <ul>
   <li>name: 目录的最后一个部分</li>
   <li>suffix:目录中最后一个部分的扩展名</li>
@@ -94,7 +251,8 @@
 /
 </code></pre></div></div>
 
-<h3 id="拼接检查与分解">拼接、检查与分解</h3>
+<h3 id="拼接检查与分解">
+<a class="anchor" href="#%E6%8B%BC%E6%8E%A5%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%88%86%E8%A7%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>拼接、检查与分解</h3>
 
 <p>操作符：/
 Path对象 / Path对象</p>
@@ -154,7 +312,8 @@ parts 属性, 可以返回路径中的每一个部分</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('/', 'data', 'home', 'gaoc', 'data', '99.test', 'Untitled.ipynb.test')
 </code></pre></div></div>
 
-<h3 id="遍历文件夹">遍历文件夹</h3>
+<h3 id="遍历文件夹">
+<a class="anchor" href="#%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%A4%B9" aria-hidden="true"><span class="octicon octicon-link"></span></a>遍历文件夹</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p4</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">parent</span>
 <span class="n">p4</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span>
@@ -212,7 +371,8 @@ parts 属性, 可以返回路径中的每一个部分</p>
  PosixPath('/data/home/gaoc/data/99.test/.ipynb_checkpoints/Untitled-checkpoint.ipynb')]
 </code></pre></div></div>
 
-<h3 id="创建文件夹">创建文件夹</h3>
+<h3 id="创建文件夹">
+<a class="anchor" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建文件夹</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p5</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">p4</span><span class="p">,</span><span class="s">'test'</span><span class="p">)</span>
 <span class="n">p5</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -227,9 +387,11 @@ parts 属性, 可以返回路径中的每一个部分</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p5</span><span class="o">.</span><span class="n">mkdir</span><span class="p">((</span><span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 递归创建文件目录
 </span></code></pre></div></div>
 
-<h3 id="查看文件信息">查看文件信息</h3>
+<h3 id="查看文件信息">
+<a class="anchor" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看文件信息</h3>
 
-<h4 id="获取详细信息">获取详细信息</h4>
+<h4 id="获取详细信息">
+<a class="anchor" href="#%E8%8E%B7%E5%8F%96%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取详细信息</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'/data/home/gaoc/data/99.test/Untitled.ipynb'</span><span class="p">)</span>
 <span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span>
@@ -238,7 +400,8 @@ parts 属性, 可以返回路径中的每一个部分</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.stat_result(st_mode=33204, st_ino=57147394, st_dev=2096, st_nlink=1, st_uid=1003, st_gid=1003, st_size=636, st_atime=1555927128, st_mtime=1555926338, st_ctime=1555926338)
 </code></pre></div></div>
 
-<h4 id="文件大小">文件大小</h4>
+<h4 id="文件大小">
+<a class="anchor" href="#%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件大小</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span>
 </code></pre></div></div>
@@ -246,7 +409,8 @@ parts 属性, 可以返回路径中的每一个部分</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>636
 </code></pre></div></div>
 
-<h4 id="创建时间">创建时间</h4>
+<h4 id="创建时间">
+<a class="anchor" href="#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建时间</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_atime</span>
 </code></pre></div></div>
@@ -254,7 +418,8 @@ parts 属性, 可以返回路径中的每一个部分</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1555927128.4478571
 </code></pre></div></div>
 
-<h4 id="修改时间">修改时间</h4>
+<h4 id="修改时间">
+<a class="anchor" href="#%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4" aria-hidden="true"><span class="octicon octicon-link"></span></a>修改时间</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span>
 </code></pre></div></div>
@@ -262,9 +427,51 @@ parts 属性, 可以返回路径中的每一个部分</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1555926338.8676176
 </code></pre></div></div>
 
-<h2 id="参考">参考</h2>
+<h2 id="参考">
+<a class="anchor" href="#%E5%8F%82%E8%80%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>参考</h2>
 
 <ol>
   <li><a href="https://www.jianshu.com/p/a820038e65c3">https://www.jianshu.com/p/a820038e65c3</a></li>
   <li><a href="https://www.cnblogs.com/hkcs/p/7773484.html">https://www.cnblogs.com/hkcs/p/7773484.html</a></li>
 </ol>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ddebby/EbbyNotes"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/EbbyNotes/markdown/2019/05/07/Pathlib-Python%E7%9A%84%E8%B7%AF%E5%BE%84%E7%AE%A1%E7%90%86%E5%BA%93.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/EbbyNotes/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/EbbyNotes/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/EbbyNotes/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/EbbyNotes/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/EbbyNotes/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
