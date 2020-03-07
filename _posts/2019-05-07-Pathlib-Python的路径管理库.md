@@ -1,9 +1,8 @@
 ---
-title: "Pathlib--Python的路径管理库"
 categories:[工具]
-tags:[Python,算法]
 toc: true
 comments: true
+layout: post
 date: 2019-05-07 16:53:05
 description: "Awesome summary"
 comments: true
