@@ -1,25 +1,15 @@
 ---
-title: Pathlib--Python的路径管理库
-categories:
-  - 工具
-tags:
-  - Python
-  - 算法
-  - 文献
-keywords:
-  - 人工智能
-  - 深度学习
-  - 技术
-  - 算法
+title: "Pathlib--Python的路径管理库"
+categories:[工具]
+tags:[Python,算法]
 toc: true
 comments: true
 date: 2019-05-07 16:53:05
-title: "My Title"
-summary: "Awesome summary"
+description: "Awesome summary"
 comments: true
-image: ../images/logo.png
+image: images/fastai_logo.png
 ---
-![Pathlib使用手册](../images/logo.png)
+![Pathlib使用手册](images/fastai_logo.png)
 
 **摘要：** 整理了Pathlib的使用方法，便于速查。
 
