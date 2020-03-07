@@ -1,0 +1,270 @@
+<p><img src="../images/logo.png" alt="Pathlib使用手册" /></p>
+
+<p><strong>摘要：</strong> 整理了Pathlib的使用方法，便于速查。</p>
+
+<!-- more-->
+
+<h2 id="pathlib使用方法归纳">Pathlib使用方法归纳</h2>
+
+<h3 id="常用操作">常用操作</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p1</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+</code></pre></div></div>
+
+<h4 id="路径">路径</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p1</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/1.fast.ai/nbs/dl1')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 返回一个新的路径，这个新路径就是当前Path对象的绝对路径
+</span><span class="n">p1</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/1.fast.ai/nbs/dl1')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 也可以获取绝对路径，但是推荐使用resolve()
+</span><span class="n">p1</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/1.fast.ai/nbs/dl1')
+</code></pre></div></div>
+
+<h4 id="获取文件名文件后缀文件目录">获取文件名，文件后缀，文件目录</h4>
+<ul>
+  <li>name: 目录的最后一个部分</li>
+  <li>suffix:目录中最后一个部分的扩展名</li>
+  <li>stem：目录最后一个部分，没有后缀</li>
+  <li>suffixes：返回多个扩展名列表</li>
+  <li>with_suffix(suffix)：补充扩展名到尾部，扩展名存在无效</li>
+  <li>with_name(name)：替换目录最后一个部分并返回一个新的路径</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p2</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'/data/home/gaoc/data/99.test/Untitled.ipynb.test'</span><span class="p">)</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">name</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Untitled.ipynb'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p2</span><span class="o">.</span><span class="n">stem</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Untitled'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p2</span><span class="o">.</span><span class="n">suffix</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'.ipynb'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p2</span><span class="o">.</span><span class="n">suffixes</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['.ipynb', '.test']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p2</span><span class="o">.</span><span class="n">parent</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/99.test')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 返回一个iterable, 包含所有父目录
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p2</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/data/home/gaoc/data/99.test
+/data/home/gaoc/data
+/data/home/gaoc
+/data/home
+/data
+/
+</code></pre></div></div>
+
+<h3 id="拼接检查与分解">拼接、检查与分解</h3>
+
+<p>操作符：/
+Path对象 / Path对象</p>
+
+<p>Path对象 / 字符串 或者 字符串 / Path对象</p>
+
+<p>分解：
+parts 属性, 可以返回路径中的每一个部分</p>
+
+<p>joinpath：</p>
+
+<p>joinpath(*other) 连接多个字符串到Path对象中</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p3</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">'test.txt'</span><span class="p">)</span>
+<span class="n">p3</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/99.test/test.txt')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p3</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s">'test2.txt'</span>
+<span class="n">p3</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/99.test/test2.txt')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p3</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s">'etc'</span><span class="p">,</span> <span class="s">'init.d'</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s">'abc'</span><span class="p">))</span>
+<span class="n">p3</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/99.test/etc/init.d/abc')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p3</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p3</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p3</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 将路径通过分隔符分割成一个元组
+</span><span class="n">p2</span><span class="o">.</span><span class="n">parts</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('/', 'data', 'home', 'gaoc', 'data', '99.test', 'Untitled.ipynb.test')
+</code></pre></div></div>
+
+<h3 id="遍历文件夹">遍历文件夹</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p4</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">p4</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;generator object Path.iterdir at 0x7f6dfc0fbeb8&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 相当于os.listdir
+</span><span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">p4</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/data/home/gaoc/data/99.test/.ipynb_checkpoints
+/data/home/gaoc/data/99.test/data-science
+/data/home/gaoc/data/99.test/Untitled.ipynb
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">list</span><span class="p">(</span><span class="n">p4</span><span class="o">.</span><span class="n">iterdir</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[PosixPath('/data/home/gaoc/data/99.test/.ipynb_checkpoints'),
+ PosixPath('/data/home/gaoc/data/99.test/test'),
+ PosixPath('/data/home/gaoc/data/99.test/data-science'),
+ PosixPath('/data/home/gaoc/data/99.test/Untitled.ipynb')]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 相当于os.listdir, 但是可以添加匹配条件
+</span><span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">p4</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">"*.ipynb"</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/data/home/gaoc/data/99.test/Untitled.ipynb
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">list</span><span class="p">(</span><span class="n">p4</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">"*.ipynb"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[PosixPath('/data/home/gaoc/data/99.test/Untitled.ipynb')]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 相当于os.walk, 也可以添加匹配条件
+</span><span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">p4</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s">"*.ipynb"</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/data/home/gaoc/data/99.test/Untitled.ipynb
+/data/home/gaoc/data/99.test/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">list</span><span class="p">(</span><span class="n">p4</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s">"*.ipynb"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[PosixPath('/data/home/gaoc/data/99.test/Untitled.ipynb'),
+ PosixPath('/data/home/gaoc/data/99.test/.ipynb_checkpoints/Untitled-checkpoint.ipynb')]
+</code></pre></div></div>
+
+<h3 id="创建文件夹">创建文件夹</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p5</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">p4</span><span class="p">,</span><span class="s">'test'</span><span class="p">)</span>
+<span class="n">p5</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p5</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PosixPath('/data/home/gaoc/data/99.test/test')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p5</span><span class="o">.</span><span class="n">mkdir</span><span class="p">((</span><span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 递归创建文件目录
+</span></code></pre></div></div>
+
+<h3 id="查看文件信息">查看文件信息</h3>
+
+<h4 id="获取详细信息">获取详细信息</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'/data/home/gaoc/data/99.test/Untitled.ipynb'</span><span class="p">)</span>
+<span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.stat_result(st_mode=33204, st_ino=57147394, st_dev=2096, st_nlink=1, st_uid=1003, st_gid=1003, st_size=636, st_atime=1555927128, st_mtime=1555926338, st_ctime=1555926338)
+</code></pre></div></div>
+
+<h4 id="文件大小">文件大小</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>636
+</code></pre></div></div>
+
+<h4 id="创建时间">创建时间</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_atime</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1555927128.4478571
+</code></pre></div></div>
+
+<h4 id="修改时间">修改时间</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p6</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1555926338.8676176
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.jianshu.com/p/a820038e65c3">https://www.jianshu.com/p/a820038e65c3</a></li>
+  <li><a href="https://www.cnblogs.com/hkcs/p/7773484.html">https://www.cnblogs.com/hkcs/p/7773484.html</a></li>
+</ol>
